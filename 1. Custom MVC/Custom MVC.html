@@ -19,7 +19,10 @@
                	
             };
             
-            
+            function Controller(model, view) {
+                this.model = model;
+                this.view = view;
+            }
             
             
             Controller.prototype.setView = function(viewType) {
@@ -39,14 +42,18 @@
             	console.dir(Model.prototype); 
             }
             
-            
+            function Model(data) {
+                this.data = data;
+            }
             
             
             Model.prototype.addData = function(data) {
                 this.data.push(data);  
             };
             
-            
+            function View() {
+                this.renderMode = "list";
+            }
             
             
             View.prototype.render = function(model, renderMode) {
