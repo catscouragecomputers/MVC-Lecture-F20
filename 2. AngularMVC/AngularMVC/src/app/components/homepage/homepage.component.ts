@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { PlanetModelService } from 'src/app/services/planet-model.service';
 
-import planets from '../../../assets/planetData.json';
+import planets from 'src/assets/planetData.json';
+import { Planets } from 'src/app/types/planets';
 
 @Component({
   selector: 'app-homepage',
@@ -17,12 +18,32 @@ export class HomepageComponent implements OnInit {
 
   data: Array<Planets> = planets;
 
-  constructor(private model: PlanetModelService) {}
+  totalPlanets: number = 8;
+
+  constructor(private model: PlanetModelService) {
+    this.selection = 'Select One';
+  }
 
   ngOnInit(): void {}
 
   selected() {
     console.log(this.selection);
     // this.views.push('test');
+  }
+
+  addMyPlanet() {
+    this.data.push({
+      name: this.formPlanetName,
+      color: 'gray',
+      radius: 1186,
+      satellites: 5,
+    });
+
+    console.log(this.data);
+  }
+
+  getTotalPlanets() {
+    this.totalPlanets = this.data.length;
+    return this.data.length;
   }
 }

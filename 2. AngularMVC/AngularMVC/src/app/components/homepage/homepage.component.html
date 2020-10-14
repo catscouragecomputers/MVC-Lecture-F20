@@ -21,7 +21,7 @@
 
         <br>
 
-        <button (click)="addMyPlanet()">Add Pluto</button>
+        <button (click)="addMyPlanet()">Add Planet</button>
     </form>
     <!-- switch (selection) { -->
     <div [ngSwitch]="selection">
@@ -57,11 +57,44 @@
 
         <!-- System View -->
         <div *ngSwitchCase="'system'">
-            <div class="planet">
-                <div></div>
-                <span></span>
+            <div class="planet" *ngFor="let p of data">
+                <div [ngStyle]="{
+                    'width': p.radius / 69911 * 300 + 'px', 
+                    'height': p.radius / 69911 * 300 + 'px', 
+                    'background-color': p.color
+                    }"></div>
+                <span>{{ p.name }}</span>
             </div>
         </div>
 
+        <div *ngSwitchCase="'all'">
+            <ul>
+                <li *ngFor="let p of data">
+                    {{p.name}} has a radius of {{p.radius}}km and {{p.satellites}} satellites
+                </li>
+            </ul>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Radius</th>
+                    <th>Satellites</th>
+                </tr>
+                <tr *ngFor="let p of data">
+                    <td>{{p.name}}</td>
+                    <td>{{p.color}}</td>
+                    <td>{{p.radius}}</td>
+                    <td>{{p.satellites}}</td>
+                </tr>
+            </table>
+            <div class="planet" *ngFor="let p of data">
+                <div [ngStyle]="{
+                                'width': p.radius / 69911 * 300 + 'px', 
+                                'height': p.radius / 69911 * 300 + 'px', 
+                                'background-color': p.color
+                                }"></div>
+                <span>{{ p.name }}</span>
+            </div>
+        </div>
     </div>
 </div>
